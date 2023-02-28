@@ -1,7 +1,7 @@
 const environment = getEnvironment();
 
 let apiURL = "";
-if (environment === "development") apiURL = "http://localhost:8080";
+if (environment === "development") apiURL = "http://localhost:8000";
 
 function getEnvironment() {
   if (window.location.href.indexOf("app-staging") !== -1) return "staging";

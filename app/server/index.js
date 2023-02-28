@@ -3,7 +3,7 @@ const path = require("path");
 const hsts = require("hsts");
 
 const app = express();
-const port = 8080;
+const port = 8000;
 
 console.log("coucou");
 
