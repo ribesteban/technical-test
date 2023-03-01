@@ -57,4 +57,5 @@ Send us the project and answer to those simple questions :
   `I added a feature that allows you to create tickets on projects. We can now add and delete tasks and update their status directly through the project page`
 
 - Do you have any feedback about the code / architecture of the project and what was the difficulty you encountered while doing it ?
+
   `I think it is not good to create multiple components in the same file. Files in the scenes folder become overloaded and lose readability. It also prevents having more generic components which cause repetitions. Forms should all be done with Formik in order to have persistence.`
