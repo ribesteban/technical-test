@@ -41,11 +41,20 @@ Time to be creative, and efficient. Do what you think would be the best for your
 Send us the project and answer to those simple questions :
 
 - What bugs did you find ? How did you solve these and why ?
+
   `I change the find by findOne on the function get project because we want only one project, not array of projects.`
+
   `When we created a new user, we had a problem with the registration of the username because we used the value name`
+
   `I also changed the type of the input password and use Formik on this form`
+
   `On the comment textarea of ​​an activity the name of the project in the placeholder was undefined because the variable was not good`
+
   `When updating a project, nothing happened when you click on Update, the method was using onChange instead of onClick`
+
 - Which feature did you develop and why ?
+
   `I added a feature that allows you to create tickets on projects. We can now add and delete tasks and update their status directly through the project page`
+
 - Do you have any feedback about the code / architecture of the project and what was the difficulty you encountered while doing it ?
+  `I think it is not good to create multiple components in the same file. Files in the scenes folder become overloaded and lose readability. It also prevents having more generic components which cause repetitions. Forms should all be done with Formik in order to have persistence.`
