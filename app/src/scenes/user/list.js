@@ -1,10 +1,11 @@
-import { Formik } from "formik";
+import { Field, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import Loader from "../../components/loader";
 import LoadingButton from "../../components/loadingButton";
 import api from "../../services/api";
+import validator from "validator";
 
 const NewList = () => {
   const [users, setUsers] = useState(null);
@@ -105,7 +106,7 @@ const Create = () => {
               e.stopPropagation();
             }}>
             <Formik
-              initialValues={{}}
+              initialValues={{ username: "", email: "", password: "" }}
               onSubmit={async (values, { setSubmitting }) => {
                 try {
                   values.status = "active";
@@ -122,29 +123,67 @@ const Create = () => {
                 }
                 setSubmitting(false);
               }}>
-              {({ values, handleChange, handleSubmit, isSubmitting }) => (
+              {({ values, errors, handleChange, handleSubmit, isSubmitting }) => (
                 <React.Fragment>
-                  <div>
-                    <div className="flex justify-between flex-wrap">
-                      <div className="w-full md:w-[48%] mt-2">
-                        <div className="text-[14px] text-[#212325] font-medium	">Name</div>
-                        <input className="projectsInput text-[14px] font-normal text-[#212325] rounded-[10px]" name="username" value={values.username} onChange={handleChange} />
+                  <div className="d-flex justify-between flex-wrap mb-4">
+                    <div className="w-full md:w-[48%] mt-2">
+                      <div className="flex flex-col-reverse">
+                        <Field
+                          className="peer signInInputs "
+                          validate={(v) => validator.isEmpty(v) && "This field is Required"}
+                          name="username"
+                          type="text"
+                          id="username"
+                          value={values.username}
+                          onChange={handleChange}
+                        />
+                        <label className="peer-focus:text-[#116eee]" htmlFor="username">
+                          Username
+                        </label>
                       </div>
-                      <div className="w-full md:w-[48%] mt-2">
-                        <div className="text-[14px] text-[#212325] font-medium	">Email</div>
-                        <input className="projectsInput text-[14px] font-normal text-[#212325] rounded-[10px]" name="email" value={values.email} onChange={handleChange} />
-                      </div>
+                      {/* Error */}
+                      <p className="text-[12px] text-[#FD3131]">{errors.username}</p>
                     </div>
-                    <div className="flex justify-between flex-wrap mt-3">
-                      {/* Password */}
-                      <div className="w-full md:w-[48%] mt-2">
-                        <div className="text-[14px] text-[#212325] font-medium	">Password</div>
-                        <input className="projectsInput text-[14px] font-normal text-[#212325] rounded-[10px]" name="password" value={values.password} onChange={handleChange} />
+
+                    <div className="w-full md:w-[48%] mt-2">
+                      <div className="flex flex-col-reverse">
+                        <Field
+                          className="peer signInInputs"
+                          validate={(v) => validator.isEmpty(v) && "This field is Required"}
+                          name="email"
+                          type="email"
+                          id="email"
+                          value={values.email}
+                          onChange={handleChange}
+                        />
+                        <label className="peer-focus:text-[#116eee]" htmlFor="email">
+                          Email
+                        </label>
                       </div>
+                      {/* Error */}
+                      <p className="text-[12px] text-[#FD3131]">{errors.email}</p>
+                    </div>
+
+                    <div className="w-full md:w-[48%] mt-2">
+                      <div className="flex flex-col-reverse">
+                        <Field
+                          className="peer signInInputs"
+                          validate={(v) => validator.isEmpty(v) && "This field is Required"}
+                          name="password"
+                          type="password"
+                          id="password"
+                          value={values.password}
+                          onChange={handleChange}
+                        />
+                        <label className="peer-focus:text-[#116eee]" htmlFor="password">
+                          Password
+                        </label>
+                      </div>
+                      {/* Error */}
+                      <p className="text-[12px] text-[#FD3131]">{errors.password}</p>
                     </div>
                   </div>
 
-                  <br />
                   <LoadingButton
                     className="mt-[1rem]  bg-[#0560FD] text-[16px] font-medium text-[#FFFFFF] py-[12px] px-[22px] rounded-[10px]"
                     loading={isSubmitting}
@@ -212,6 +251,7 @@ const FilterStatus = ({ filter, setFilter }) => {
 
 const UserCard = ({ hit, projects }) => {
   const history = useHistory();
+  console.log(hit);
   return (
     <div
       onClick={() => history.push(`/user/${hit._id}`)}
